@@ -1,0 +1,40 @@
+﻿@model IEnumerable<MyAccounts.Models.AccountsModels>
+@{
+    Layout = null;
+}
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountTypes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+    </tr>
+    @{
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.ID
+                </td>
+                <td>
+                    @item.AccountTypes
+                </td>
+                <td>
+                    @item.AccountDate.ToString("yyyy/MM/dd")
+                </td>
+                <td>
+                    @($"{item.Amount:N0}")
+                </td>
+            </tr>
+        }
+    }
+</table>

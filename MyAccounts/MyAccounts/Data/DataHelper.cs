@@ -19,8 +19,8 @@ namespace MyAccounts.Data
                 {
                     ID = (i + 1),
                     AccountTypes = (i % 2 == 1 ? EnumData.AccountTypes.支出 : EnumData.AccountTypes.收入).ToString(),
-                    AccountDate = today.AddDays(-new Random().Next(1, 365)),
-                    Amount = new Random().Next(1, 99999),
+                    AccountDate = today.AddDays(-(i + 1) * 15),
+                    Amount = new Random(Guid.NewGuid().GetHashCode()).Next(1, 99999),
                     Msg = string.Empty
                 });
             }
