@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<MyAccounts.Models.AccountsModels>
+@using MyAccounts.Data;
 @{
     Layout = null;
 }
@@ -26,7 +27,7 @@
                     @item.ID
                 </td>
                 <td>
-                    @(item.AccountTypes == "1" ? "支出" : "收入")
+                    @WebHelper.GetAccountType(item.AccountTypes)
                 </td>
                 <td>
                     @item.AccountDate.ToString("yyyy/MM/dd")
