@@ -18,7 +18,7 @@ namespace MyAccounts.Data
                 accounts.Add(new AccountsModels()
                 {
                     ID = (i + 1),
-                    AccountTypes = (i % 2 == 1 ? EnumData.AccountTypes.支出 : EnumData.AccountTypes.收入).ToString(),
+                    AccountTypes = (i % 2 == 1).ToString(),
                     AccountDate = today.AddDays(-(i + 1) * 15),
                     Amount = new Random(Guid.NewGuid().GetHashCode()).Next(1, 99999),
                     Msg = string.Empty
