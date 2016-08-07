@@ -11,7 +11,7 @@ namespace MyAccounts.Controllers
     {
         public ActionResult Index()
         {
-            return View(DataHelper.Accounts());
+            return View(DataHelper.GetAccounts());
         }
 
         [ChildActionOnly]

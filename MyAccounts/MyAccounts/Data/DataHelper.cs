@@ -27,5 +27,24 @@ namespace MyAccounts.Data
 
             return accounts;
         }
+
+        public static List<AccountsModels> GetAccounts()
+        {
+            List<AccountsModels> accounts = new List<AccountsModels>();
+
+            using (var db = new SkillTreeHomeworkEntities())
+            {
+                accounts = db.AccountBook.Select(s => new AccountsModels()
+                {
+                    //ID = s.Id // GUID 無法轉為int？ ID先暫不做設定。
+                    AccountTypes = s.Categoryyy.ToString(),
+                    AccountDate = s.Dateee,
+                    Amount = s.Amounttt,
+                    Msg = s.Remarkkk
+                }).Take(10).ToList(); // 測試用抓個10筆資料就好
+            }
+
+            return accounts;
+        }
     }
 }
