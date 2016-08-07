@@ -34,14 +34,17 @@ namespace MyAccounts.Data
 
             using (var db = new SkillTreeHomeworkEntities())
             {
-                accounts = db.AccountBook.Select(s => new AccountsModels()
-                {
-                    //ID = s.Id // GUID 無法轉為int？ ID先暫不做設定。
-                    AccountTypes = s.Categoryyy.ToString(),
-                    AccountDate = s.Dateee,
-                    Amount = s.Amounttt,
-                    Msg = s.Remarkkk
-                }).Take(10).ToList(); // 測試用抓個10筆資料就好
+                //先把資料撈回至記憶體後再重新select給定ID，
+                //會這樣做是想嘗試當view也不能更動時該如何給流水號
+                accounts = db.AccountBook.Take(10).ToList()
+                    .Select((s, index) => new AccountsModels()
+                    {
+                        ID = index + 1,
+                        AccountTypes = s.Categoryyy.ToString(),
+                        AccountDate = s.Dateee,
+                        Amount = s.Amounttt,
+                        Msg = s.Remarkkk
+                    }).ToList();
             }
 
             return accounts;
