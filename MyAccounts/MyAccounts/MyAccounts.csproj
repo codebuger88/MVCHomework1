@@ -160,6 +160,7 @@
       <DependentUpon>WebEnities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AccountsService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\SkillTreeHomework.mdf" />
