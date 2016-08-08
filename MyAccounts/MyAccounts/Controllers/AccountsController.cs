@@ -1,17 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using MyAccounts.Data;
+using MyAccounts.Services;
 
 namespace MyAccounts.Controllers
 {
     public class AccountsController : Controller
     {
+        private readonly AccountsService _service;
+
+        public AccountsController()
+        {
+            _service = new AccountsService();
+        }
+
         public ActionResult Index()
         {
-            return View(DataHelper.GetAccounts());
+            return View(_service.GetLists());
         }
 
         [ChildActionOnly]
