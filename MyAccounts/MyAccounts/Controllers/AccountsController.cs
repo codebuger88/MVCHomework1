@@ -21,16 +21,12 @@ namespace MyAccounts.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create([Bind(Include = "Categoryyy,Amounttt,Dateee,Remarkkk")] AccountBook model)
         {
             if (ModelState.IsValid)
             {
-                AccountBook model = new AccountBook();
-                if (TryUpdateModel(model, "", collection.AllKeys))
-                {
-                    _service.Add(model);
-                    _service.Save();
-                }
+                _service.Add(model);
+                _service.Save();
             }
 
             return RedirectToAction("Index");
