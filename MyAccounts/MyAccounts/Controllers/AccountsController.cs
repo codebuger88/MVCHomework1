@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using MyAccounts.Data;
+using MyAccounts.Models;
 using MyAccounts.Services;
 
 namespace MyAccounts.Controllers
@@ -16,6 +17,23 @@ namespace MyAccounts.Controllers
         public ActionResult Index()
         {
             return View(_service.GetLists());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(FormCollection collection)
+        {
+            if (ModelState.IsValid)
+            {
+                AccountBook model = new AccountBook();
+                if (TryUpdateModel(model, "", collection.AllKeys))
+                {
+                    _service.Add(model);
+                    _service.Save();
+                }
+            }
+
+            return RedirectToAction("Index");
         }
 
         [ChildActionOnly]

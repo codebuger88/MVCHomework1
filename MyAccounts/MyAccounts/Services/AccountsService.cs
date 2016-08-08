@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MyAccounts.Models;
 
@@ -17,7 +18,7 @@ namespace MyAccounts.Services
         {
             List<AccountsModels> lists = new List<AccountsModels>();
 
-            lists = _db.AccountBook.Take(10).ToList()
+            lists = _db.AccountBook.Take(10).OrderByDescending(o => o.Dateee).ToList()
                     .Select((s, index) => new AccountsModels()
                     {
                         ID = index + 1,
@@ -28,6 +29,17 @@ namespace MyAccounts.Services
                     }).ToList();
 
             return lists;
+        }
+
+        public void Add(AccountBook model)
+        {
+            model.Id = Guid.NewGuid();
+            _db.AccountBook.Add(model);
+        }
+
+        public void Save()
+        {
+            _db.SaveChanges();
         }
     }
 }
