@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using MyAccounts.Data;
 using MyAccounts.Models;
+using MyAccounts.Repositories;
 using MyAccounts.Services;
 
 namespace MyAccounts.Controllers
@@ -11,7 +12,8 @@ namespace MyAccounts.Controllers
 
         public AccountsController()
         {
-            _service = new AccountsService();
+            var unitOfWork = new EFUnitOfWork();
+            _service = new AccountsService(unitOfWork);
         }
 
         public ActionResult Index()

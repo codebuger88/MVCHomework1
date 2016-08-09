@@ -2,23 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using MyAccounts.Models;
+using MyAccounts.Repositories;
 
 namespace MyAccounts.Services
 {
-    public class AccountsService
+    public class AccountsService : Repository<AccountsModels>
     {
-        private SkillTreeHomeworkEntities _db;
+        private readonly IRepository<AccountBook> _accountBookRepo;
 
-        public AccountsService()
+        public AccountsService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-            _db = new SkillTreeHomeworkEntities();
+            _accountBookRepo = new Repository<AccountBook>(unitOfWork);
         }
 
         public IEnumerable<AccountsModels> GetLists()
         {
             List<AccountsModels> lists = new List<AccountsModels>();
 
-            lists = _db.AccountBook.Take(10).OrderByDescending(o => o.Dateee).ToList()
+            lists = _accountBookRepo.LookupAll().Take(10).OrderByDescending(o => o.Dateee).ToList()
                     .Select((s, index) => new AccountsModels()
                     {
                         ID = index + 1,
@@ -34,12 +35,12 @@ namespace MyAccounts.Services
         public void Add(AccountBook model)
         {
             model.Id = Guid.NewGuid();
-            _db.AccountBook.Add(model);
+            _accountBookRepo.Create(model);
         }
 
         public void Save()
         {
-            _db.SaveChanges();
+            _accountBookRepo.Commit();
         }
     }
 }
