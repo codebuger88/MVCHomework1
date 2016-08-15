@@ -18,7 +18,7 @@ namespace MyAccounts.Controllers
 
         public ActionResult Index()
         {
-            return View(_service.GetLists());
+            return View();
         }
 
         [HttpPost]
@@ -29,15 +29,17 @@ namespace MyAccounts.Controllers
             {
                 _service.Add(model);
                 _service.Save();
+
+                return RedirectToAction("Index");
             }
 
-            return RedirectToAction("Index");
+            return View(model);
         }
 
         [ChildActionOnly]
         public ActionResult ChildContent()
         {
-            return View(DataHelper.Accounts());
+            return View(_service.GetLists());
         }
     }
 }
