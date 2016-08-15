@@ -1,0 +1,18 @@
+﻿@helper GetAccountTypes(string accountTypes)
+{
+string className = string.Empty;
+string types = string.Empty;
+
+switch (accountTypes)
+{
+    case "0":
+        className = "blue";
+        types = "收入";
+        break;
+    case "1":
+        className = "red";
+        types = "支出";
+        break;
+}
+    <span class="@className">@types</span>
+}

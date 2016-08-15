@@ -194,6 +194,7 @@
     <Content Include="Models\WebEnities.edmx.diagram">
       <DependentUpon>WebEnities.edmx</DependentUpon>
     </Content>
+    <Content Include="App_Code\RazorHelper.cshtml" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Models\WebEnities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

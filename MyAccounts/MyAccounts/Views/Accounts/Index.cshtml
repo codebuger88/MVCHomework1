@@ -2,6 +2,17 @@
 @{
     ViewBag.Title = "我的記帳本";
 }
+@section styles{
+    <style>
+        .red {
+            color: red;
+        }
+
+        .blue {
+            color: blue;
+        }
+    </style>
+}
 
 <div class="well">
     @using (Html.BeginForm("Create", "Accounts", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal" }))

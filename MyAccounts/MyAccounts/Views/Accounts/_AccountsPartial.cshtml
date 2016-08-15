@@ -26,7 +26,7 @@
                     @item.ID
                 </td>
                 <td>
-                    @(item.AccountTypes == "1" ? "支出" : "收入")
+                    @RazorHelper.GetAccountTypes(item.AccountTypes)
                 </td>
                 <td>
                     @item.AccountDate.ToString("yyyy/MM/dd")
