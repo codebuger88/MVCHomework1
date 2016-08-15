@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MyAccounts.Models.AccountsModels>
+﻿@model MyAccounts.Models.AccountBook
 @{
     ViewBag.Title = "我的記帳本";
 }
@@ -15,35 +15,31 @@
 }
 
 <div class="well">
-    @using (Html.BeginForm("Create", "Accounts", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal" }))
+    @using (Html.BeginForm("Index", "Accounts", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal" }))
     {
         @Html.AntiForgeryToken()
         <div class="form-group">
-            <label for="Categoryyy" class="col-sm-2 control-label">類別</label>
+            @Html.LabelFor(model => model.Categoryyy, htmlAttributes: new { @class = "col-sm-2 control-label" })
             <div class="col-sm-10">
-                <select id="Categoryyy" name="Categoryyy" class="form-control">
-                    <option value="" selected>請選擇</option>
-                    <option value="1">支出</option>
-                    <option value="0">收入</option>
-                </select>
+                @Html.DropDownListFor(model => model.Categoryyy, (IEnumerable<SelectListItem>)ViewBag.DDLCategory, new { @class = "form-control" })
             </div>
         </div>
         <div class="form-group">
-            <label for="Amounttt" class="col-sm-2 control-label">金額</label>
+            @Html.LabelFor(model => model.Amounttt, htmlAttributes: new { @class = "col-sm-2 control-label" })
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="Amounttt" id="Amounttt" placeholder="金額">
+                @Html.EditorFor(model => model.Amounttt, new { htmlAttributes = new { @class = "form-control", placeholder = "金額" } })
             </div>
         </div>
         <div class="form-group">
-            <label for="Dateee" class="col-sm-2 control-label">日期</label>
+            @Html.LabelFor(model => model.Dateee, htmlAttributes: new { @class = "col-sm-2 control-label" })
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="Dateee" id="Dateee" placeholder="日期">
+                @Html.EditorFor(model => model.Dateee, new { htmlAttributes = new { @class = "form-control", placeholder = "日期" } })
             </div>
         </div>
         <div class="form-group">
-            <label for="Remarkkk" class="col-sm-2 control-label">備註</label>
+            @Html.LabelFor(model => model.Remarkkk, htmlAttributes: new { @class = "col-sm-2 control-label" })
             <div class="col-sm-10">
-                <textarea class="form-control" name="Remarkkk" id="Remarkkk"></textarea>
+                @Html.TextAreaFor(model => model.Remarkkk, htmlAttributes: new { @class = "form-control", placeholder = "備註" })
             </div>
         </div>
         <div class="form-group">
@@ -56,9 +52,9 @@
 
 <div class="row">
     @*<div class="col-md-12">
-        這是Partial View<br />
-        @Html.Partial("_AccountsPartial", Model)
-    </div>*@
+            這是Partial View<br />
+            @Html.Partial("_AccountsPartial", Model)
+        </div>*@
 
     <div class="col-md-12">
         這是Child Action<br />

@@ -3,6 +3,7 @@ using MyAccounts.Data;
 using MyAccounts.Models;
 using MyAccounts.Repositories;
 using MyAccounts.Services;
+using System.Collections.Generic;
 
 namespace MyAccounts.Controllers
 {
@@ -18,12 +19,14 @@ namespace MyAccounts.Controllers
 
         public ActionResult Index()
         {
+            ViewData["DDLCategory"] = Categories();
+
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Categoryyy,Amounttt,Dateee,Remarkkk")] AccountBook model)
+        public ActionResult Index([Bind(Include = "Categoryyy,Amounttt,Dateee,Remarkkk")] AccountBook model)
         {
             if (ModelState.IsValid)
             {
@@ -33,6 +36,8 @@ namespace MyAccounts.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewData["DDLCategory"] = Categories();
+
             return View(model);
         }
 
@@ -40,6 +45,16 @@ namespace MyAccounts.Controllers
         public ActionResult ChildContent()
         {
             return View(_service.GetLists());
+        }
+
+        private List<SelectListItem> Categories()
+        {
+            var categories = new List<SelectListItem>();
+            categories.Add(new SelectListItem { Text = "請選擇", Value = "" });
+            categories.Add(new SelectListItem { Text = "收入", Value = "0" });
+            categories.Add(new SelectListItem { Text = "支出", Value = "1" });
+
+            return categories;
         }
     }
 }
