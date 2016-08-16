@@ -15,7 +15,7 @@
 }
 
 <div class="well">
-    @using (Html.BeginForm("Index", "Accounts", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal" }))
+    @using (Html.BeginForm("Create", "Accounts", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal" }))
     {
         @Html.AntiForgeryToken()
         <div class="form-group">

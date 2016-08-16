@@ -26,7 +26,7 @@ namespace MyAccounts.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index([Bind(Include = "Categoryyy,Amounttt,Dateee,Remarkkk")] AccountBook model)
+        public ActionResult Create([Bind(Include = "Categoryyy,Amounttt,Dateee,Remarkkk")] AccountBook model)
         {
             if (ModelState.IsValid)
             {
@@ -38,7 +38,7 @@ namespace MyAccounts.Controllers
 
             ViewData["DDLCategory"] = Categories();
 
-            return View(model);
+            return View("Index");
         }
 
         [ChildActionOnly]
