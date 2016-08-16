@@ -144,6 +144,7 @@
       <DependentUpon>WebEnities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountsModels.cs" />
+    <Compile Include="Models\MetaData\AccountBookMetaData.cs" />
     <Compile Include="Models\WebEnities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -250,6 +251,7 @@
     <Content Include="Scripts\jquery-3.1.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.0.min.map" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
