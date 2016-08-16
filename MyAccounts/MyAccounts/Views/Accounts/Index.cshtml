@@ -18,28 +18,33 @@
     @using (Html.BeginForm("Create", "Accounts", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal" }))
     {
         @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Categoryyy, htmlAttributes: new { @class = "col-sm-2 control-label" })
             <div class="col-sm-10">
                 @Html.DropDownListFor(model => model.Categoryyy, (IEnumerable<SelectListItem>)ViewBag.DDLCategory, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Categoryyy, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.Amounttt, htmlAttributes: new { @class = "col-sm-2 control-label" })
             <div class="col-sm-10">
                 @Html.EditorFor(model => model.Amounttt, new { htmlAttributes = new { @class = "form-control", placeholder = "金額" } })
+                @Html.ValidationMessageFor(model => model.Amounttt, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.Dateee, htmlAttributes: new { @class = "col-sm-2 control-label" })
             <div class="col-sm-10">
                 @Html.EditorFor(model => model.Dateee, new { htmlAttributes = new { @class = "form-control", placeholder = "日期" } })
+                @Html.ValidationMessageFor(model => model.Dateee, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.Remarkkk, htmlAttributes: new { @class = "col-sm-2 control-label" })
             <div class="col-sm-10">
-                @Html.TextAreaFor(model => model.Remarkkk, htmlAttributes: new { @class = "form-control", placeholder = "備註" })
+                @Html.EditorFor(model => model.Remarkkk, new { htmlAttributes = new { @class = "form-control", placeholder = "備註" } })
+                @Html.ValidationMessageFor(model => model.Remarkkk, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
@@ -61,3 +66,36 @@
         @Html.Action("ChildContent")
     </div>
 </div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        (function ($) {
+            $.validator.addMethod('overDate', function (value, element, param) {
+                if (!value) {
+                    return true;
+                }
+                try {
+                    var dateValue = value.replace(/-/g, "/").replace(/\./g, "/");
+                }
+                catch (e) {
+                    return false;
+                }
+
+                return dateValue <= param.max;
+            });
+
+            $.validator.unobtrusive.adapters.add('overdate', ['max'], function (options) {
+                var params = {
+                    max: options.params.max
+                };
+
+                options.rules['overDate'] = params;
+                if (options.message) {
+                    options.messages['overDate'] = options.message;
+                }
+            });
+        }(jQuery));
+    </script>
+}

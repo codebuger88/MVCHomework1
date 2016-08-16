@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using MyAccounts.Validation;
 
 namespace MyAccounts.Models
 {
@@ -16,11 +17,15 @@ namespace MyAccounts.Models
             public System.Guid Id { get; set; }
             [Display(Name = "類別")]
             public int Categoryyy { get; set; }
-            [Display(Name = "日期")]
+            [Display(Name = "金額"), Range(1, int.MaxValue, ErrorMessage = "請輸入正整數")]
             public int Amounttt { get; set; }
-            [Display(Name = "金額")]
+            [Required]
+            [Display(Name = "日期")]
+            [DataType(DataType.Date)]
+            [OverDate()]
             public System.DateTime Dateee { get; set; }
-            [Display(Name = "備註"), DisplayFormat(ConvertEmptyStringToNull = false)]
+            [Display(Name = "備註"), DisplayFormat(ConvertEmptyStringToNull = false), 
+                DataType(DataType.MultilineText), StringLength(100, ErrorMessage = "最多輸入100個字元")]
             public string Remarkkk { get; set; }
         }
     }
