@@ -41,6 +41,16 @@ namespace MyAccounts.Controllers
             return View("Index");
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AjaxPost([Bind(Include = "Categoryyy,Amounttt,Dateee,Remarkkk")] AccountBook model)
+        {
+            _service.Add(model);
+            _service.Save();
+
+            return PartialView("_AccountsPartial", _service.GetLists());
+        }
+
         [ChildActionOnly]
         public ActionResult ChildContent()
         {

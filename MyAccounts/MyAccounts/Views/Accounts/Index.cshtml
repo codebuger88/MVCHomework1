@@ -15,7 +15,7 @@
 }
 
 <div class="well">
-    @using (Html.BeginForm("Create", "Accounts", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal" }))
+    @using (Ajax.BeginForm("Create", null, new AjaxOptions { UpdateTargetId = "results", Url = Url.Action("AjaxPost"), Confirm = "Submit!?" }, htmlAttributes: new { @class = "form-horizontal" }))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -63,13 +63,15 @@
 
     <div class="col-md-12">
         這是Child Action<br />
-        @Html.Action("ChildContent")
+        <div id="results">
+            @Html.Action("ChildContent")
+        </div>
     </div>
 </div>
 
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
-
+    <script src="https://cdn.jsdelivr.net/jquery.ajax.unobtrusive/3.2.4/jquery.unobtrusive-ajax.min.js"></script>
     <script type="text/javascript">
         (function ($) {
             $.validator.addMethod('overDate', function (value, element, param) {
