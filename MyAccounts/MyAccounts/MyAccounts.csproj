@@ -134,6 +134,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ValidationController.cs" />
     <Compile Include="Data\DataHelper.cs" />
     <Compile Include="Data\EnumData.cs" />
     <Compile Include="Data\WebHelper.cs" />
@@ -166,7 +167,7 @@
     <Compile Include="Repositories\IUnitOfWork.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Services\AccountsService.cs" />
-    <Compile Include="ValidationAttribute\OverDateAttribute.cs" />
+    <Compile Include="Filters\ValidationAttribute\OverDateAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\SkillTreeHomework.mdf" />
@@ -197,6 +198,7 @@
       <DependentUpon>WebEnities.edmx</DependentUpon>
     </Content>
     <Content Include="App_Code\RazorHelper.cshtml" />
+    <None Include="bundleconfig.json" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Models\WebEnities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -224,6 +226,10 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\validation\overdate.js" />
+    <Content Include="Scripts\validation\overdate.min.js">
+      <DependentUpon>overdate.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -252,7 +258,9 @@
     <Content Include="Scripts\jquery-3.1.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.0.min.map" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Validation\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

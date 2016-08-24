@@ -72,32 +72,5 @@
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script src="https://cdn.jsdelivr.net/jquery.ajax.unobtrusive/3.2.4/jquery.unobtrusive-ajax.min.js"></script>
-    <script type="text/javascript">
-        (function ($) {
-            $.validator.addMethod('overDate', function (value, element, param) {
-                if (!value) {
-                    return true;
-                }
-                try {
-                    var dateValue = value.replace(/-/g, "/").replace(/\./g, "/");
-                }
-                catch (e) {
-                    return false;
-                }
-
-                return dateValue <= param.max;
-            });
-
-            $.validator.unobtrusive.adapters.add('overdate', ['max'], function (options) {
-                var params = {
-                    max: options.params.max
-                };
-
-                options.rules['overDate'] = params;
-                if (options.message) {
-                    options.messages['overDate'] = options.message;
-                }
-            });
-        }(jQuery));
-    </script>
+    <script src="~/Scripts/validation/overdate.min.js"></script>
 }

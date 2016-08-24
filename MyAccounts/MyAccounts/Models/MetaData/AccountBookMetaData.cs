@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using MyAccounts.Validation;
+using System.Web.Mvc;
 
 namespace MyAccounts.Models
 {
@@ -22,10 +23,13 @@ namespace MyAccounts.Models
             [Required]
             [Display(Name = "日期")]
             [DataType(DataType.Date)]
-            [OverDate()]
+            //[OverDate()]
+            [Remote("Index", "Validation", AreaReference.UseRoot, ErrorMessage = "超過日期限制")]
             public System.DateTime Dateee { get; set; }
-            [Display(Name = "備註"), DisplayFormat(ConvertEmptyStringToNull = false), 
-                DataType(DataType.MultilineText), StringLength(100, ErrorMessage = "最多輸入100個字元")]
+            [Display(Name = "備註")]
+            [DisplayFormat(ConvertEmptyStringToNull = false)]
+            [DataType(DataType.MultilineText)]
+            [StringLength(100, ErrorMessage = "最多輸入100個字元")]
             public string Remarkkk { get; set; }
         }
     }
