@@ -19,7 +19,7 @@ namespace MyAccounts.Services
         {
             List<AccountsModels> lists = new List<AccountsModels>();
 
-            lists = _accountBookRepo.LookupAll().Take(10).OrderByDescending(o => o.Dateee).ToList()
+            lists = _accountBookRepo.LookupAll().OrderByDescending(o => o.Dateee).ToList()
                     .Select((s, index) => new AccountsModels()
                     {
                         ID = index + 1,

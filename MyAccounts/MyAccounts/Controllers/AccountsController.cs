@@ -1,15 +1,17 @@
-﻿using System.Web.Mvc;
-using MyAccounts.Data;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
+using MvcPaging;
 using MyAccounts.Models;
+using MyAccounts.Models.ViewModels;
 using MyAccounts.Repositories;
 using MyAccounts.Services;
-using System.Collections.Generic;
 
 namespace MyAccounts.Controllers
 {
     public class AccountsController : Controller
     {
         private readonly AccountsService _service;
+        private readonly int pageSize = 10;
 
         public AccountsController()
         {
@@ -17,20 +19,27 @@ namespace MyAccounts.Controllers
             _service = new AccountsService(unitOfWork);
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             ViewData["DDLCategory"] = Categories();
 
-            return View();
+            int pageIndex = page.HasValue ? page.Value - 1 : 0;
+
+            AccountsViewModels model = new AccountsViewModels()
+            {
+                AccountsModels = _service.GetLists().ToPagedList(pageIndex, pageSize)
+            };
+
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Categoryyy,Amounttt,Dateee,Remarkkk")] AccountBook model)
+        public ActionResult Create([Bind(Include = "Categoryyy,Amounttt,Dateee,Remarkkk")] AccountBook accountBook)
         {
             if (ModelState.IsValid)
             {
-                _service.Add(model);
+                _service.Add(accountBook);
                 _service.Save();
 
                 return RedirectToAction("Index");
@@ -38,17 +47,22 @@ namespace MyAccounts.Controllers
 
             ViewData["DDLCategory"] = Categories();
 
-            return View("Index");
+            AccountsViewModels viewModel = new AccountsViewModels()
+            {
+                AccountsModels = _service.GetLists().ToPagedList(0, pageSize)
+            };
+
+            return View("Index", viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AjaxPost([Bind(Include = "Categoryyy,Amounttt,Dateee,Remarkkk")] AccountBook model)
+        public ActionResult AjaxPost([Bind(Include = "Categoryyy,Amounttt,Dateee,Remarkkk")] AccountBook accountBook)
         {
-            _service.Add(model);
+            _service.Add(accountBook);
             _service.Save();
 
-            return PartialView("_AccountsPartial", _service.GetLists());
+            return PartialView("_AccountsPartial", _service.GetLists().ToPagedList(0, pageSize));
         }
 
         [ChildActionOnly]

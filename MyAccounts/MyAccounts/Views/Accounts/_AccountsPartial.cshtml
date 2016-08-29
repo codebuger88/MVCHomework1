@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MyAccounts.Models.AccountsModels>
+﻿@model IPagedList<MyAccounts.Models.AccountsModels>
 @{
     Layout = null;
 }
@@ -6,16 +6,16 @@
 <table class="table table-bordered table-hover">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ID)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AccountTypes)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().AccountTypes)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AccountDate)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().AccountDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Amount)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Amount)
         </th>
     </tr>
     @{
@@ -37,4 +37,12 @@
             </tr>
         }
     }
+    <tr>
+        <td colspan="7">
+            <ul class="pagination pull-right">
+                @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount)
+                @*@Html.MvcSimplePager(Model.AccountsModels.PageSize, Model.AccountsModels.TotalItemCount, true)*@
+            </ul>
+        </td>
+    </tr>
 </table>
