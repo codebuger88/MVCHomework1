@@ -12,6 +12,7 @@
             color: blue;
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.min.css" />
 }
 
 <div class="well">
@@ -36,7 +37,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Dateee, htmlAttributes: new { @class = "col-sm-2 control-label" })
             <div class="col-sm-10">
-                @Html.EditorFor(model => model.Dateee, new { htmlAttributes = new { @class = "form-control", placeholder = "日期" } })
+                @Html.EditorFor(model => model.Dateee, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "日期" } })
                 @Html.ValidationMessageFor(model => model.Dateee, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -72,5 +73,16 @@
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script src="https://cdn.jsdelivr.net/jquery.ajax.unobtrusive/3.2.4/jquery.unobtrusive-ajax.min.js"></script>
-    <script src="~/Scripts/validation/overdate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('.datepicker').datepicker({
+                format: 'yyyy-mm-dd',
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                autoclose: true
+            });
+        });
+    </script>
 }

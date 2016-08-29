@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using MyAccounts.Validation;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
 namespace MyAccounts.Models
@@ -22,7 +17,8 @@ namespace MyAccounts.Models
             public int Amounttt { get; set; }
             [Required]
             [Display(Name = "日期")]
-            [DataType(DataType.Date)]
+            [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+            //[DataType(DataType.Date)]
             //[OverDate()]
             [Remote("Index", "Validation", AreaReference.UseRoot, ErrorMessage = "超過日期限制")]
             public System.DateTime Dateee { get; set; }
