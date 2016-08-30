@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Web;
 
 namespace MyAccounts.Models
 {
@@ -22,5 +19,8 @@ namespace MyAccounts.Models
 
         [DisplayName("備註")]
         public string Msg { get; set; }
+
+        public Guid GId { get; set; }
+
     }
 }

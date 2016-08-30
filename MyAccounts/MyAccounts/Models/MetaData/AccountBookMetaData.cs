@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
+using MyAccounts.Validation;
 
 namespace MyAccounts.Models
 {
@@ -19,8 +19,7 @@ namespace MyAccounts.Models
             [Display(Name = "日期")]
             [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
             //[DataType(DataType.Date)]
-            //[OverDate()]
-            [Remote("Index", "Validation", AreaReference.UseRoot, ErrorMessage = "超過日期限制")]
+            [OverDate()]
             public System.DateTime Dateee { get; set; }
             [Display(Name = "備註")]
             [DisplayFormat(ConvertEmptyStringToNull = false)]

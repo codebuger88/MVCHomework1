@@ -137,6 +137,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Backend\BackendAreaRegistration.cs" />
+    <Compile Include="Areas\Backend\Controllers\ManageAccountsController.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\FeedController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -205,7 +207,12 @@
     <Content Include="Models\WebEnities.edmx.diagram">
       <DependentUpon>WebEnities.edmx</DependentUpon>
     </Content>
-    <Content Include="App_Code\RazorHelper.cshtml" />
+    <Content Include="App_Code\AccountTypes.cshtml" />
+    <Content Include="Areas\Backend\Views\web.config" />
+    <Content Include="Areas\Backend\Views\ManageAccounts\_AccountsPartial.cshtml" />
+    <Content Include="Areas\Backend\Views\ManageAccounts\Index.cshtml" />
+    <Content Include="Areas\Backend\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Backend\Views\ManageAccounts\Edit.cshtml" />
     <None Include="bundleconfig.json" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Models\WebEnities.Context.tt">
@@ -269,6 +276,8 @@
     <Content Include="Scripts\jquery-3.1.0.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Backend\Models\" />
+    <Folder Include="Areas\Backend\Views\Shared\" />
     <Folder Include="Views\Validation\" />
   </ItemGroup>
   <PropertyGroup>

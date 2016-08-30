@@ -1,4 +1,5 @@
-﻿@model IPagedList<MyAccounts.Models.AccountsModels>
+﻿@using MvcPaging
+@model IPagedList<MyAccounts.Models.AccountsModels>
 @{
     Layout = null;
 }
@@ -17,6 +18,9 @@
         <th>
             @Html.DisplayNameFor(model => model.FirstOrDefault().Amount)
         </th>
+        <th>
+            
+        </th>
     </tr>
     @{
         foreach (var item in Model)
@@ -33,6 +37,10 @@
                 </td>
                 <td>
                     @($"{item.Amount:N0}")
+                </td>
+                <td>
+                    @Html.ActionLink("修改", "Edit", new { id = item.GId, area = "Backend" }, htmlAttributes: new { @class = "btn btn-white btn-xs" })
+                    <a href="@Url.Action("Delete", "ManageAccounts", new { id = item.GId, area = "Backend" })" class="btn btn-white btn-xs delete"><i class="fa fa-trash-o"></i></a>
                 </td>
             </tr>
         }

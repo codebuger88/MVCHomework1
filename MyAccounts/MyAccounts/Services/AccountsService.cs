@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using MyAccounts.Models;
 using MyAccounts.Repositories;
 
@@ -23,6 +24,7 @@ namespace MyAccounts.Services
                     .Select((s, index) => new AccountsModels()
                     {
                         ID = index + 1,
+                        GId = s.Id,
                         AccountTypes = s.Categoryyy.ToString(),
                         AccountDate = s.Dateee,
                         Amount = s.Amounttt,
@@ -36,6 +38,19 @@ namespace MyAccounts.Services
         {
             model.Id = Guid.NewGuid();
             _accountBookRepo.Create(model);
+        }
+
+        public void Update(AccountBook model, AccountBook oldData)
+        {
+            oldData.Amounttt = model.Amounttt;
+            oldData.Categoryyy = model.Categoryyy;
+            oldData.Dateee = model.Dateee;
+            oldData.Remarkkk = model.Remarkkk;
+        }
+
+        public AccountBook GetSingleOrDefault(Expression<Func<AccountBook, bool>> filter)
+        {
+            return _accountBookRepo.GetSingle(filter);
         }
 
         public void Save()
