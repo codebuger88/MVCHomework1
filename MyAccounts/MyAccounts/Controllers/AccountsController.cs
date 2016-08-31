@@ -19,23 +19,25 @@ namespace MyAccounts.Controllers
             _service = new AccountsService(unitOfWork);
         }
 
-        public ActionResult Index(int? page)
+        public ActionResult Index(AccountsViewModels viewModel)
         {
             ViewData["DDLCategory"] = Categories();
 
-            int pageIndex = page.HasValue ? page.Value - 1 : 0;
+            int pageIndex = viewModel.Page.HasValue ? viewModel.Page.Value - 1 : 0;
 
-            AccountsViewModels model = new AccountsViewModels()
-            {
-                AccountsModels = _service.GetLists().ToPagedList(pageIndex, pageSize)
-            };
+            //AccountsViewModels model = new AccountsViewModels()
+            //{
+            //    AccountsModels = _service.GetLists().ToPagedList(pageIndex, pageSize)
+            //};
 
-            return View(model);
+            viewModel.AccountsModels = _service.GetLists(viewModel.Year, viewModel.Month).ToPagedList(pageIndex, pageSize);
+
+            return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Categoryyy,Amounttt,Dateee,Remarkkk")] AccountBook accountBook)
+        public ActionResult Create([Bind(Include = "Categoryyy,Amounttt,Dateee,Remarkkk")] AccountBook accountBook, int? year, int? month)
         {
             if (ModelState.IsValid)
             {
@@ -49,7 +51,7 @@ namespace MyAccounts.Controllers
 
             AccountsViewModels viewModel = new AccountsViewModels()
             {
-                AccountsModels = _service.GetLists().ToPagedList(0, pageSize)
+                AccountsModels = _service.GetLists(year, month).ToPagedList(0, pageSize)
             };
 
             return View("Index", viewModel);
@@ -57,20 +59,14 @@ namespace MyAccounts.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AjaxPost([Bind(Include = "Categoryyy,Amounttt,Dateee,Remarkkk")] AccountBook accountBook)
+        public ActionResult AjaxPost([Bind(Include = "Categoryyy,Amounttt,Dateee,Remarkkk")] AccountBook accountBook, int? year, int? month)
         {
             _service.Add(accountBook);
             _service.Save();
 
-            return PartialView("_AccountsPartial", _service.GetLists().ToPagedList(0, pageSize));
+            return PartialView("_AccountsPartial", _service.GetLists(year, month).ToPagedList(0, pageSize));
         }
-
-        [ChildActionOnly]
-        public ActionResult ChildContent()
-        {
-            return View(_service.GetLists());
-        }
-
+        
         private List<SelectListItem> Categories()
         {
             var categories = new List<SelectListItem>();

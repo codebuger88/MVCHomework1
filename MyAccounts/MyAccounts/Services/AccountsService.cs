@@ -16,11 +16,23 @@ namespace MyAccounts.Services
             _accountBookRepo = new Repository<AccountBook>(unitOfWork);
         }
 
-        public IEnumerable<AccountsModels> GetLists()
+        public IEnumerable<AccountsModels> GetLists(int? year, int? month)
         {
-            List<AccountsModels> lists = new List<AccountsModels>();
+            var query = _accountBookRepo.LookupAll();
 
-            lists = _accountBookRepo.LookupAll().OrderByDescending(o => o.Dateee).ToList()
+            if (year.HasValue)
+            {
+                query = query.Where(x => x.Dateee.Year == year.Value);
+            }
+
+            if (month.HasValue)
+            {
+                query = query.Where(x => x.Dateee.Month == month.Value);
+            }
+
+            var lists = new List<AccountsModels>();
+
+            lists = query.OrderByDescending(o => o.Dateee).ToList()
                     .Select((s, index) => new AccountsModels()
                     {
                         ID = index + 1,

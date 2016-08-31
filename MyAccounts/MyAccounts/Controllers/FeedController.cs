@@ -36,7 +36,7 @@ namespace MyAccounts.Controllers
 
             var items = new List<SyndicationItem>();
 
-            var datas = _service.GetLists().Take(10);
+            var datas = _service.GetLists(null, null).Take(10);
 
             foreach (var data in datas)
             {

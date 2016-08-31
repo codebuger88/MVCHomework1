@@ -30,7 +30,7 @@ namespace MyAccounts.Areas.Backend.Controllers
 
             AccountsViewModels model = new AccountsViewModels()
             {
-                AccountsModels = _service.GetLists().ToPagedList(pageIndex, pageSize)
+                AccountsModels = _service.GetLists(null, null).ToPagedList(pageIndex, pageSize)
             };
 
             return View(model);
@@ -52,7 +52,7 @@ namespace MyAccounts.Areas.Backend.Controllers
 
             AccountsViewModels viewModel = new AccountsViewModels()
             {
-                AccountsModels = _service.GetLists().ToPagedList(0, pageSize)
+                AccountsModels = _service.GetLists(null, null).ToPagedList(0, pageSize)
             };
 
             return View("Index", viewModel);
@@ -100,7 +100,7 @@ namespace MyAccounts.Areas.Backend.Controllers
             _service.Add(accountBook);
             _service.Save();
 
-            return PartialView("_AccountsPartial", _service.GetLists().ToPagedList(0, pageSize));
+            return PartialView("_AccountsPartial", _service.GetLists(null, null).ToPagedList(0, pageSize));
         }
 
         private List<SelectListItem> Categories(int val = 0)
