@@ -24,7 +24,7 @@ namespace MyAccounts
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/Account/Login"),
+                LoginPath = new PathString("/"),
                 Provider = new CookieAuthenticationProvider
                 {
                     // 讓應用程式在使用者登入時驗證安全性戳記。

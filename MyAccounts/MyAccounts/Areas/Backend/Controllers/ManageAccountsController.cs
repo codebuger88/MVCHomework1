@@ -10,6 +10,7 @@ using MyAccounts.Services;
 
 namespace MyAccounts.Areas.Backend.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ManageAccountsController : Controller
     {
         private readonly AccountsService _service;
