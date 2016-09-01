@@ -48,6 +48,10 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
       <Private>True</Private>
@@ -181,6 +185,25 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Backend\BackendAreaRegistration.cs" />
     <Compile Include="Areas\Backend\Controllers\ManageAccountsController.cs" />
+    <Compile Include="Areas\MvcElmahDashboard\Code\ElmahDashboardContext.cs" />
+    <Compile Include="Areas\MvcElmahDashboard\Code\ElmahError.cs" />
+    <Compile Include="Areas\MvcElmahDashboard\Code\ElmahErrorCounters.cs" />
+    <Compile Include="Areas\MvcElmahDashboard\Code\ElmahErrorItem.cs" />
+    <Compile Include="Areas\MvcElmahDashboard\Code\Extensions.cs" />
+    <Compile Include="Areas\MvcElmahDashboard\Code\ExternalServiceConfig.cs" />
+    <Compile Include="Areas\MvcElmahDashboard\Code\HeartBeatService.cs" />
+    <Compile Include="Areas\MvcElmahDashboard\Code\RequeueCache.cs" />
+    <Compile Include="Areas\MvcElmahDashboard\Controllers\HomeController.cs" />
+    <Compile Include="Areas\MvcElmahDashboard\Controllers\LogsController.cs" />
+    <Compile Include="Areas\MvcElmahDashboard\Controllers\SharedController.cs" />
+    <Compile Include="Areas\MvcElmahDashboard\Models\Home\DailyStatsModel.cs" />
+    <Compile Include="Areas\MvcElmahDashboard\Models\Home\HourlyStatsModel.cs" />
+    <Compile Include="Areas\MvcElmahDashboard\Models\Logs\DetailsModel.cs" />
+    <Compile Include="Areas\MvcElmahDashboard\Models\Logs\IndexModel.cs" />
+    <Compile Include="Areas\MvcElmahDashboard\Models\Logs\ItemDetailsModel.cs" />
+    <Compile Include="Areas\MvcElmahDashboard\Models\Logs\ItemsModel.cs" />
+    <Compile Include="Areas\MvcElmahDashboard\Models\Logs\PrevNextRequest.cs" />
+    <Compile Include="Areas\MvcElmahDashboard\MvcElmahDashboardAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\FeedController.cs" />
@@ -231,6 +254,7 @@
     <Content Include="App_Data\SkillTreeHomework_log.ldf">
       <DependentUpon>SkillTreeHomework.mdf</DependentUpon>
     </Content>
+    <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -260,6 +284,21 @@
     <Content Include="Areas\Backend\Views\ManageAccounts\Index.cshtml" />
     <Content Include="Areas\Backend\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Backend\Views\ManageAccounts\Edit.cshtml" />
+    <Content Include="Areas\MvcElmahDashboard\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\MvcElmahDashboard\Views\web.config" />
+    <Content Include="Areas\MvcElmahDashboard\Views\Shared\_styles.cshtml" />
+    <Content Include="Areas\MvcElmahDashboard\Views\Shared\_scripts.cshtml" />
+    <Content Include="Areas\MvcElmahDashboard\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\MvcElmahDashboard\Views\Logs\ItemsPart.cshtml" />
+    <Content Include="Areas\MvcElmahDashboard\Views\Logs\ItemDetailsPart.cshtml" />
+    <Content Include="Areas\MvcElmahDashboard\Views\Logs\Index_scripts.cshtml" />
+    <Content Include="Areas\MvcElmahDashboard\Views\Logs\Index.cshtml" />
+    <Content Include="Areas\MvcElmahDashboard\Views\Logs\Details_scripts.cshtml" />
+    <Content Include="Areas\MvcElmahDashboard\Views\Logs\Details.cshtml" />
+    <Content Include="Areas\MvcElmahDashboard\Views\Home\Index_scripts.cshtml" />
+    <Content Include="Areas\MvcElmahDashboard\Views\Home\Index.cshtml" />
+    <Content Include="Areas\MvcElmahDashboard\Views\Home\HourlyStats.cshtml" />
+    <Content Include="Areas\MvcElmahDashboard\Views\Home\DailyStats.cshtml" />
     <None Include="bundleconfig.json" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Models\WebEnities.Context.tt">
@@ -272,6 +311,7 @@
       <DependentUpon>WebEnities.edmx</DependentUpon>
       <LastGenOutput>WebEnities.cs</LastGenOutput>
     </Content>
+    <Content Include="MvcElmahDashboard_Readme.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.1.0.js" />
