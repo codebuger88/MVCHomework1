@@ -60,6 +60,11 @@ namespace MyAccounts.Services
             oldData.Remarkkk = model.Remarkkk;
         }
 
+        public void Delete(AccountBook model)
+        {
+            _accountBookRepo.Remove(model);
+        }
+
         public AccountBook GetSingleOrDefault(Expression<Func<AccountBook, bool>> filter)
         {
             return _accountBookRepo.GetSingle(filter);

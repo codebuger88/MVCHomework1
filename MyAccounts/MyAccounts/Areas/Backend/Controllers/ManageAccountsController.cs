@@ -94,6 +94,28 @@ namespace MyAccounts.Areas.Backend.Controllers
         }
 
         [HttpPost]
+        public ActionResult Delete(Guid id)
+        {
+            var oldData = _service.GetSingleOrDefault(x => x.Id == id);
+            if (oldData == null)
+            {
+                return Json(new { result = "fail", msg = "刪除失敗" });
+            }
+
+            try
+            {
+                _service.Delete(oldData);
+                _service.Save();
+
+                return PartialView("_AccountsPartial", _service.GetLists(null, null).ToPagedList(0, pageSize));
+            }
+            catch (Exception ex)
+            {
+                return Json(new { result = "fail", msg = "刪除失敗" });
+            }
+        }
+
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AjaxPost([Bind(Include = "Categoryyy,Amounttt,Dateee,Remarkkk")] AccountBook accountBook)
         {

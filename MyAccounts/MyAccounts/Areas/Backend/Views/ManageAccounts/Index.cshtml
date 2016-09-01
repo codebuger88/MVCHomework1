@@ -69,14 +69,40 @@
     <script src="https://cdn.jsdelivr.net/jquery.ajax.unobtrusive/3.2.4/jquery.unobtrusive-ajax.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
     <script type="text/javascript">
-        $(function () {
-            $('.datepicker').datepicker({
-                format: 'yyyy-mm-dd',
-                todayBtn: "linked",
-                keyboardNavigation: false,
-                forceParse: false,
-                autoclose: true
-            });
+        $(function() {
+            $('.datepicker')
+                .datepicker({
+                    format: 'yyyy-mm-dd',
+                    todayBtn: "linked",
+                    keyboardNavigation: false,
+                    forceParse: false,
+                    autoclose: true
+                });
+
+            $('#results').on('click', 'a[data-id]', DeleteData);
         });
+
+        function DeleteData() {
+            if (confirm('確認刪除此筆資料!?')) {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("Delete")',
+                    data: { id: $(this).attr('data-id') },
+                    success: function (response) {
+                        if (response['result'] == 'fail') {
+                            alert(response.msg);
+                        }
+                        else {
+                            $('#results').html(response);
+                        }
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert('網站請求失敗，請重新嘗試');
+                    }
+                });
+            }
+
+            return false;
+        }
     </script>
 }

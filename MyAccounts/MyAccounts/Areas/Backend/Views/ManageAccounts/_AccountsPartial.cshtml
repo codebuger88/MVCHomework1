@@ -1,4 +1,4 @@
-﻿@using MvcPaging
+﻿@using MyAccounts.Helpers
 @model IPagedList<MyAccounts.Models.AccountsModels>
 @{
     Layout = null;
@@ -40,14 +40,14 @@
                 </td>
                 <td>
                     @Html.ActionLink("修改", "Edit", new { id = item.GId, area = "Backend" }, htmlAttributes: new { @class = "btn btn-white btn-xs" })
-                    <a href="@Url.Action("Delete", "ManageAccounts", new { id = item.GId, area = "Backend" })" class="btn btn-white btn-xs delete"><i class="fa fa-trash-o"></i></a>
+                    <a href="@Url.Action("Delete", "ManageAccounts", new { id = item.GId, area = "Backend" })" class="btn btn-white btn-xs delete" data-id="@item.GId"><i class="fa fa-trash-o"></i></a>
                 </td>
             </tr>
         }
     }
     <tr>
         <td colspan="7">
-            @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount)
+            @Html.MvcPager(Model.PageSize, Model.TotalItemCount, true, "Index", "")
         </td>
     </tr>
 </table>
