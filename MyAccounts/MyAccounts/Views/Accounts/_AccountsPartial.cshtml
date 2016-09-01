@@ -1,4 +1,5 @@
-﻿@model IPagedList<MyAccounts.Models.AccountsModels>
+﻿@using MyAccounts.Helpers
+@model IPagedList<MyAccounts.Models.AccountsModels>
 @{
     Layout = null;
 }
@@ -39,7 +40,7 @@
     }
     <tr>
         <td colspan="7">
-            @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount)
+            @Html.MvcPager(Model.PageSize, Model.TotalItemCount, true, "Index", "")
         </td>
     </tr>
 </table>

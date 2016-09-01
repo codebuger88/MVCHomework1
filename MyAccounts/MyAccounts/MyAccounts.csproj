@@ -190,6 +190,7 @@
     <Compile Include="Data\DataHelper.cs" />
     <Compile Include="Data\EnumData.cs" />
     <Compile Include="Data\WebHelper.cs" />
+    <Compile Include="Filters\PagerHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
